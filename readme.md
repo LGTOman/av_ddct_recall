@@ -18,29 +18,29 @@ is used to run the script must have access to the Data Domain ssh key.
 1. From a Linux system where the commands to recall data will be run 
    (the Avamar Utility node is a good place to do this):
 
-	>ssh-keyen -t dsa
+	`ssh-keyen -t ecdsa`
 
-	Leave the pass phrase blank and make note of the location to the id_dsa.pub file.
+	Leave the pass phrase blank and make note of the location to the id_ecdsa.pub file.
 
-2. Edit the id_dsa.pub file and copy the contents to the clipboard.
+2. Edit the id_ecdsa.pub file and copy the contents to the clipboard.
 
 3. Login to the console of the Data Domain as the sysadmin user.
 
 4. Run the command:
 
-	>adminaccess add ssh-keys
+	`adminaccess add ssh-keys`
 
 	Paste the keys from the clipboard. Be careful not to include any trailing 
 	carriage returns. Use Control-D to save the key.
 
 5. Verify that they key was taken by running the command:
 
-	>adminaccess show ssh-keys
+	`adminaccess show ssh-keys`
 
 6.	Verify that Admin Access works by issuing the following command on the 
 	Linux system that the ssh key was created on:
 
-	>ssh sysadmin@<data_domain_system> filesys show status
+	`ssh sysadmin@<data_domain_system> filesys show status`
 
 	The status of the Data Domain file system should be displayed.
 
@@ -53,7 +53,7 @@ is used to run the script must have access to the Data Domain ssh key.
 
 2. Set the script to be executable. 
 
-   >chmod 755 av_ddct_recall.sh
+   `chmod 755 av_ddct_recall.sh`
 
 3.   Verify that the ssh key created for Admin Access is installed in `/home/admin/.ssh`
 
@@ -124,100 +124,102 @@ number of the backup. This can be done two ways.
 To list/query backups that are on the Data Domain Cloud Tier run the command below. If backup
 files on the Data Domain are listed they are on the Cloud Tier and can be recalled.
 
->./av_ddct_recall.sh --label label_num --name client_path --sshid ssh_id_file --user DD_User --listonly
+`./av_ddct_recall.sh --label label_num --name client_path --sshid ssh_id_file --user DD_User --listonly`
 
 Example:
 
->admin@ave-03:~/>: ./av_ddct_recall.sh --label 8 --name /vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE --sshid /home/admin/.ssh/id_ecdsa --user sysadmin --listonly
->Searching for backup files to recall...
->Warning: Permanently added 'ddve-01.vlab.local' (ECDSA) to the list of known hosts.
->EMC Data Domain Virtual Edition
->Listing or recalling a backup for client /vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE from 14 files.
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/C72555BBBE76E6B728343EAE9929A2CBFB0743FC
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/F2D9844BD6D77E93B5C8BC9631699FA0A948AA87
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/FB8EF224F27E03C510581104368A6C1D0F0D92FC
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7F480B1997C7EA8EC9A162EA11CD091FA870C0A1
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/F9D5E927E61F587F14D3C86F40C7D8DEDD48B1F0
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/D64EFFD14C0F546E848CED817D759DCFC7C15381
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7612CA7CF36C38CEBDB207CD0BB05F1013E0281E
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/ED90E3F13AA5DE8D68DA567F28DCAB194D0553FA
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/ED90E3F13AA5DE8D68DA567F28DCAB194D0553FA.trace
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/91CD6F915C4CC01F2C3F4743698E99EE6DC12EDA
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7F014F9CDDCB11515755E3741F7EFC29C86A257D
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/0CD5C4400901EB16E5A32CF7B15367465B24B0D7
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/0CD5C4400901EB16E5A32CF7B15367465B24B0D7.trace
->/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/v2_ddr_files.xml
+```
+admin@ave-03:~/>: ./av_ddct_recall.sh --label 8 --name /vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE --sshid /home/admin/.ssh/id_ecdsa --user sysadmin --listonly
+Searching for backup files to recall...
+EMC Data Domain Virtual Edition
+Listing or recalling a backup for client /vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE from 14 files.
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/C72555BBBE76E6B728343EAE9929A2CBFB0743FC
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/F2D9844BD6D77E93B5C8BC9631699FA0A948AA87
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/FB8EF224F27E03C510581104368A6C1D0F0D92FC
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7F480B1997C7EA8EC9A162EA11CD091FA870C0A1
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/F9D5E927E61F587F14D3C86F40C7D8DEDD48B1F0
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/D64EFFD14C0F546E848CED817D759DCFC7C15381
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7612CA7CF36C38CEBDB207CD0BB05F1013E0281E
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/ED90E3F13AA5DE8D68DA567F28DCAB194D0553FA
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/ED90E3F13AA5DE8D68DA567F28DCAB194D0553FA.trace
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/91CD6F915C4CC01F2C3F4743698E99EE6DC12EDA
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7F014F9CDDCB11515755E3741F7EFC29C86A257D
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/0CD5C4400901EB16E5A32CF7B15367465B24B0D7
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/0CD5C4400901EB16E5A32CF7B15367465B24B0D7.trace
+/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/v2_ddr_files.xml
+```
 
 To recall the backup from the Data Domain run:
 
-> ./av_ddct_recall.sh --label label_num --name client_path --sshid ssh_id_file --user DD_User
+  `./av_ddct_recall.sh --label label_num --name client_path --sshid ssh_id_file --user DD_User`
 
 Example:
 
+```
+admin@ave-03:~/>: ./av_ddct_recall.sh --label 8 --name /vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE --sshid /home/admin/.ssh/id_ecdsa --user sysadmin
+Searching for backup files to recall...
+EMC Data Domain Virtual Edition
+Listing or recalling a backup for client /vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE from 14 files.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/C72555BBBE76E6B728343EAE9929A2CBFB0743FC". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/F2D9844BD6D77E93B5C8BC9631699FA0A948AA87". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/FB8EF224F27E03C510581104368A6C1D0F0D92FC". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7F480B1997C7EA8EC9A162EA11CD091FA870C0A1". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/F9D5E927E61F587F14D3C86F40C7D8DEDD48B1F0". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/D64EFFD14C0F546E848CED817D759DCFC7C15381". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7612CA7CF36C38CEBDB207CD0BB05F1013E0281E". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/ED90E3F13AA5DE8D68DA567F28DCAB194D0553FA". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/ED90E3F13AA5DE8D68DA567F28DCAB194D0553FA.trace". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/91CD6F915C4CC01F2C3F4743698E99EE6DC12EDA". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7F014F9CDDCB11515755E3741F7EFC29C86A257D". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/0CD5C4400901EB16E5A32CF7B15367465B24B0D7". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/0CD5C4400901EB16E5A32CF7B15367465B24B0D7.trace". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/v2_ddr_files.xml". Run the status command to monitor its progress.
+EMC Data Domain Virtual Edition
+Data-movement to cloud tier:
+----------------------------
+Data-movement was started on Oct 17 2016 22:15 and completed on Oct 17 2016 22:20
+Copied (post-comp): 36.70 MiB, (pre-comp): 104.00 GiB,
+Files copied: 212, Files verified: 212, Files installed: 212
 
->admin@ave-03:~/>: ./av_ddct_recall.sh --label 8 --name /vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE --sshid /home/admin/.ssh/id_ecdsa --user sysadmin
->Searching for backup files to recall...
->EMC Data Domain Virtual Edition
->Listing or recalling a backup for client /vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE from 14 files.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/C72555BBBE76E6B728343EAE9929A2CBFB0743FC". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/F2D9844BD6D77E93B5C8BC9631699FA0A948AA87". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/FB8EF224F27E03C510581104368A6C1D0F0D92FC". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7F480B1997C7EA8EC9A162EA11CD091FA870C0A1". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/F9D5E927E61F587F14D3C86F40C7D8DEDD48B1F0". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/D64EFFD14C0F546E848CED817D759DCFC7C15381". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7612CA7CF36C38CEBDB207CD0BB05F1013E0281E". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/ED90E3F13AA5DE8D68DA567F28DCAB194D0553FA". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/ED90E3F13AA5DE8D68DA567F28DCAB194D0553FA.trace". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/91CD6F915C4CC01F2C3F4743698E99EE6DC12EDA". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/7F014F9CDDCB11515755E3741F7EFC29C86A257D". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/0CD5C4400901EB16E5A32CF7B15367465B24B0D7". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/0CD5C4400901EB16E5A32CF7B15367465B24B0D7.trace". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Recall started for "/data/col1/avamar-1456413272/cur/e05fe58850bcab7ed7dd44a7d5f967432011dfeb/1D22552BC3CAA98/v2_ddr_files.xml". Run the status command to monitor its progress.
->EMC Data Domain Virtual Edition
->Data-movement to cloud tier:
->----------------------------
->Data-movement was started on Oct 17 2016 22:15 and completed on Oct 17 2016 22:20
->Copied (post-comp): 36.70 MiB, (pre-comp): 104.00 GiB,
->Files copied: 212, Files verified: 212, Files installed: 212
->
->Data-movement recall:
->---------------------
->No recall operations running.
+Data-movement recall:
+---------------------
+No recall operations running.
+```
 
 ## Recalling all data for a client
 
 To recall all data for a client run the command:
 
->./av_ddct_recall.sh --all --name client_path --sshid ssh_id_file --user DD_User
+`./av_ddct_recall.sh --all --name client_path --sshid ssh_id_file --user DD_User`
  
  
 Example:
  
->admin@ave-03:~/>: ./av_ddct_recall.sh --all --name /vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE --sshid /home/admin/.ssh/id_ecdsa --user sysadmin
+`admin@ave-03:~/>: ./av_ddct_recall.sh --all --name /vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE --sshid /home/admin/.ssh/id_ecdsa --user sysadmin`
 
 ## Recalling all data on all Data Domains
 
 To recall all data that Avamar has backed up on all configured Data Domains run:
 
->./av_ddct_recall.sh --all --sshid ssh_id_file --user DD_User 
+`./av_ddct_recall.sh --all --sshid ssh_id_file --user DD_User`
 
 Example:
 
->admin@ave-03:~/>: ./av_ddct_recall.sh --all --sshid /home/admin/.ssh/id_ecdsa --user sysadmin
+`admin@ave-03:~/>: ./av_ddct_recall.sh --all --sshid /home/admin/.ssh/id_ecdsa --user sysadmin`
 
 # Compatibility
 
