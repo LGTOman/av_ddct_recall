@@ -95,24 +95,24 @@ number of the backup. This can be done two ways.
 	
 	Example:
 
-    `admin@ave-03:~/>: mccli backup show --name=/vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE`
-    `0,23000,CLI command completed successfully.`
-    `Created                 LabelNum Size   Retention Hostname          Location`
-    `----------------------- -------- ------ --------- ----------------- --------`
-    `2016-10-18 09:09:25 EDT 14       2.0 GB D         ave-03.vlab.local Local`
-    `2016-10-18 03:37:22 EDT 13       2.0 GB D         ave-03.vlab.local Local`
-    `2016-10-17 09:05:44 EDT 12       2.0 GB D         ave-03.vlab.local Local`
-    `2016-10-16 09:07:30 EDT 11       2.0 GB DW        ave-03.vlab.local Local`
-    `2016-10-15 09:06:05 EDT 10       2.0 GB D         ave-03.vlab.local Local`
-    `2016-10-14 09:07:27 EDT 9        2.0 GB D         ave-03.vlab.local Local`
-    `2016-10-13 09:07:22 EDT 8        2.0 GB D         ave-03.vlab.local Local`
-    `2016-10-12 09:04:53 EDT 7        2.0 GB D         ave-03.vlab.local Local`
-    `2016-10-11 09:08:34 EDT 6        2.0 GB D         ave-03.vlab.local Local`
-    `2016-10-10 09:04:31 EDT 5        2.0 GB D         ave-03.vlab.local Local`
-    `2016-10-09 15:51:38 EDT 4        2.0 GB D         ave-03.vlab.local Local`
-    `2016-10-09 09:05:24 EDT 3        2.0 GB DW        ave-03.vlab.local Local`
-    `2016-10-08 21:40:42 EDT 2        2.0 GB D         ave-03.vlab.local Local`
-    `2016-10-07 09:05:26 EDT 1        2.0 GB DWMY      ave-03.vlab.local Local`
+    ```admin@ave-03:~/>: mccli backup show --name=/vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE
+    0,23000,CLI command completed successfully.
+    Created                 LabelNum Size   Retention Hostname          Location
+    ----------------------- -------- ------ --------- ----------------- --------
+    2016-10-18 09:09:25 EDT 14       2.0 GB D         ave-03.vlab.local Local
+    2016-10-18 03:37:22 EDT 13       2.0 GB D         ave-03.vlab.local Local
+    2016-10-17 09:05:44 EDT 12       2.0 GB D         ave-03.vlab.local Local
+    2016-10-16 09:07:30 EDT 11       2.0 GB DW        ave-03.vlab.local Local
+    2016-10-15 09:06:05 EDT 10       2.0 GB D         ave-03.vlab.local Local
+    2016-10-14 09:07:27 EDT 9        2.0 GB D         ave-03.vlab.local Local
+    2016-10-13 09:07:22 EDT 8        2.0 GB D         ave-03.vlab.local Local
+    2016-10-12 09:04:53 EDT 7        2.0 GB D         ave-03.vlab.local Local
+    2016-10-11 09:08:34 EDT 6        2.0 GB D         ave-03.vlab.local Local
+    2016-10-10 09:04:31 EDT 5        2.0 GB D         ave-03.vlab.local Local
+    2016-10-09 15:51:38 EDT 4        2.0 GB D         ave-03.vlab.local Local
+    2016-10-09 09:05:24 EDT 3        2.0 GB DW        ave-03.vlab.local Local
+    2016-10-08 21:40:42 EDT 2        2.0 GB D         ave-03.vlab.local Local
+    2016-10-07 09:05:26 EDT 1        2.0 GB DWMY      ave-03.vlab.local Local```
 
    Record the number in the LabelNum column that corresponds to the backup being 
    queried.
