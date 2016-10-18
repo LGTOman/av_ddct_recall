@@ -1,7 +1,7 @@
 # Introduction
 
 This Avamar script will recall backups from the Data Domain Cloud Tier. It is meant 
-to be used with older versions of Avamar that are not intergrated with Data Domain 
+to be used with older versions of Avamar that are not integrated with Data Domain 
 Cloud Tier.
 
 # Installation
@@ -9,9 +9,9 @@ Cloud Tier.
 In order to use this script Admin Access must be configured on the Data Domain 
 system. This allows a remote system with the proper ssh key to use ssh to execute 
 commands on the Data Domain without a password. Next the script will need to be
-installed on a system witht he Avamar mccli, avmgr and ddmaint commmands. The 
-Avamar Utilty Node, Avamar Single Node or AVE work best for this. The user that 
-is used to run the script must have accces to the Data Domain ssh key. 
+installed on a system with he Avamar mccli, avmgr and ddmaint commands. The 
+Avamar Utility Node, Avamar Single Node or AVE work best for this. The user that 
+is used to run the script must have access to the Data Domain ssh key. 
 
 ## Configuring Admin Access for Data Domain
 
@@ -20,7 +20,7 @@ is used to run the script must have accces to the Data Domain ssh key.
 
 	>ssh-keyen -t dsa
 
-	Leave the passphrase blank and make note of the location to the id_dsa.pub file.
+	Leave the pass phrase blank and make note of the location to the id_dsa.pub file.
 
 2. Edit the id_dsa.pub file and copy the contents to the clipboard.
 
@@ -46,24 +46,24 @@ is used to run the script must have accces to the Data Domain ssh key.
 
 ## Install the script
 
-1. Download and copy the `av_dd_recall.sh` script to a location where it won't be deleted. 
+1. Download and copy the `av_ddct_recall.sh` script to a location where it won't be deleted. 
    For this example we will use `/home/admin` on the Avamar server. Use the `admin` user
    on the Avamar system to do this.
 	
 
 2. Set the script to be executable. 
 
-   >chmod 755 av_dd_recall.sh
+   >chmod 755 av_ddct_recall.sh
 
 3.   Verify that the ssh key created for Admin Access is installed in `/home/admin/.ssh`
 
 
 # Usage
 
-The av_dd_recall.sh script can be used to localt and recall a single backup based on 
+The `av_ddct_recall.sh` script can be used to locate and recall a single backup based on 
 backup label number, all backups for a client or all backups for specific or all Data 
-Domain systems. Care shoudl be taken if recalling All backups since the recall proccess 
-may take some time and incur additinal charges from public cloud providers. 
+Domain systems. Care should be taken if recalling All backups since the recall process 
+may take some time and incur additional charges from public cloud providers. 
 
 ## Single backup locate and recall
 
@@ -78,46 +78,46 @@ number of the backup. This can be done two ways.
 
 3. In the upper left window select the domain that the client is in.
 
-4. In the lower left window select the client whos data needs to be recalled.
+4. In the lower left window select the client who's data needs to be recalled.
 
 5. On the main window select the Manage tab.
 
-6. Filter the backup list basedon By day, By date range or By retention as needed.
+6. Filter the backup list based on By day, By date range or By retention as needed.
 
 7. In the lower part of the main window all of the filtered backups will be listed.
-   Locate the backup of intrest and record the number from the Number column
+   Locate the backup of interest and record the number from the Number column
 
 ### Identifying backup label numbers from the MCGUI command line
 
 1. From the command line on the Avamar Utility Node run the command:
 
-   `mccli backup show --name=<full avamar path to client>`
+   `mccli backup show --name=<full Avamar path to client>`
 	
 	Example:
 
-    >admin@ave-03:~/>: mccli backup show --name=/vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE
-    >0,23000,CLI command completed successfully.
-    >Created                 LabelNum Size   Retention Hostname          Location
-    >----------------------- -------- ------ --------- ----------------- --------
-    >2016-10-18 09:09:25 EDT 14       2.0 GB D         ave-03.vlab.local Local
-    >2016-10-18 03:37:22 EDT 13       2.0 GB D         ave-03.vlab.local Local
-    >2016-10-17 09:05:44 EDT 12       2.0 GB D         ave-03.vlab.local Local
-    >2016-10-16 09:07:30 EDT 11       2.0 GB DW        ave-03.vlab.local Local
-    >2016-10-15 09:06:05 EDT 10       2.0 GB D         ave-03.vlab.local Local
-    >2016-10-14 09:07:27 EDT 9        2.0 GB D         ave-03.vlab.local Local
-    >2016-10-13 09:07:22 EDT 8        2.0 GB D         ave-03.vlab.local Local
-    >2016-10-12 09:04:53 EDT 7        2.0 GB D         ave-03.vlab.local Local
-    >2016-10-11 09:08:34 EDT 6        2.0 GB D         ave-03.vlab.local Local
-    >2016-10-10 09:04:31 EDT 5        2.0 GB D         ave-03.vlab.local Local
-    >2016-10-09 15:51:38 EDT 4        2.0 GB D         ave-03.vlab.local Local
-    >2016-10-09 09:05:24 EDT 3        2.0 GB DW        ave-03.vlab.local Local
-    >2016-10-08 21:40:42 EDT 2        2.0 GB D         ave-03.vlab.local Local
-    >2016-10-07 09:05:26 EDT 1        2.0 GB DWMY      ave-03.vlab.local Local
+    `admin@ave-03:~/>: mccli backup show --name=/vc01.vlab.local/VirtualMachines/lguest-01_miniSUSE`
+    `0,23000,CLI command completed successfully.`
+    `Created                 LabelNum Size   Retention Hostname          Location`
+    `----------------------- -------- ------ --------- ----------------- --------`
+    `2016-10-18 09:09:25 EDT 14       2.0 GB D         ave-03.vlab.local Local`
+    `2016-10-18 03:37:22 EDT 13       2.0 GB D         ave-03.vlab.local Local`
+    `2016-10-17 09:05:44 EDT 12       2.0 GB D         ave-03.vlab.local Local`
+    `2016-10-16 09:07:30 EDT 11       2.0 GB DW        ave-03.vlab.local Local`
+    `2016-10-15 09:06:05 EDT 10       2.0 GB D         ave-03.vlab.local Local`
+    `2016-10-14 09:07:27 EDT 9        2.0 GB D         ave-03.vlab.local Local`
+    `2016-10-13 09:07:22 EDT 8        2.0 GB D         ave-03.vlab.local Local`
+    `2016-10-12 09:04:53 EDT 7        2.0 GB D         ave-03.vlab.local Local`
+    `2016-10-11 09:08:34 EDT 6        2.0 GB D         ave-03.vlab.local Local`
+    `2016-10-10 09:04:31 EDT 5        2.0 GB D         ave-03.vlab.local Local`
+    `2016-10-09 15:51:38 EDT 4        2.0 GB D         ave-03.vlab.local Local`
+    `2016-10-09 09:05:24 EDT 3        2.0 GB DW        ave-03.vlab.local Local`
+    `2016-10-08 21:40:42 EDT 2        2.0 GB D         ave-03.vlab.local Local`
+    `2016-10-07 09:05:26 EDT 1        2.0 GB DWMY      ave-03.vlab.local Local`
 
    Record the number in the LabelNum column that corresponds to the backup being 
-   quiried.
+   queried.
    
-## Run av_dd_recall.sh to locate or recall individual backups   
+## Run `av_ddct_recall.sh` to locate or recall individual backups   
 
 To list/query backups that are on the Data Domain Cloud Tier run the command below. If backup
 files on the Data Domain are listed they are on the Cloud Tier and can be recalled.
@@ -217,6 +217,6 @@ Example:
 
 >admin@ave-03:~/>: ./av_ddct_recall.sh --all --sshid /home/admin/.ssh/id_ecdsa --user sysadmin
 
-# Compatablity
+# Compatibility
 
 This script was created and tested using Avamar Virtual Edition v7.2.1-32. 
